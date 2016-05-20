@@ -18,11 +18,41 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Util.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Game\Tiles\Floor.cpp" />
+    <ClCompile Include="Game\Camera.cpp" />
+    <ClCompile Include="Game\States\GameState.cpp" />
+    <ClCompile Include="Game\GameStateManager.cpp" />
+    <ClCompile Include="Launcher.cpp" />
+    <ClCompile Include="Game\States\PlayingState.cpp" />
+    <ClCompile Include="Game\Ship.cpp" />
+    <ClCompile Include="Game\PlayerManager.cpp" />
+    <ClCompile Include="Game\Tiles\TextureMap.cpp" />
+    <ClCompile Include="Game\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\Tiles\Floor.h" />
+    <ClInclude Include="Game\Camera.h" />
+    <ClInclude Include="Game\States\GameState.h" />
+    <ClInclude Include="Game\GameStateManager.h" />
+    <ClInclude Include="Game\States\PlayingState.h" />
+    <ClInclude Include="Game\Ship.h" />
+    <ClInclude Include="Game\PlayerManager.h" />
+    <ClInclude Include="Game\Tiles\Tile.h" />
+    <ClInclude Include="Game\Tiles\TextureMap.h" />
+    <ClInclude Include="Game\ITrackable.h" />
+    <ClInclude Include="Game\World.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F091DA5C-CA06-4D6A-9C49-AD8A042E267F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GenericCityGame</RootNamespace>
+    <RootNamespace>StellaCharta</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>StellaCharta</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,10 +119,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\SFML-2.3.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\SFML-2.3.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,8 +178,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
