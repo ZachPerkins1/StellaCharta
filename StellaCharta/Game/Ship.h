@@ -5,10 +5,11 @@
 #include "Tiles/Floor.h"
 #include <cmath>
 #include "ITrackable.h"
+#include "IWorld.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820974
 
-class Ship : sf::Sprite, public ITrackable {
+class Ship : sf::Sprite, public ITrackable, public IWorld {
 public:
 	Ship();
 	//TODO: Map(std::string file)
@@ -34,11 +35,13 @@ public:
 	virtual sf::Vector2f getTrackingPos();
 	void setSelector(sf::Vector2i pos);
 
-	sf::Vector2i mapCoordsToTile(sf::Vector2f coords);
-	sf::Vector2f mapTileToCoords(sf::Vector2i coords);
+	virtual sf::Vector2i mapCoordsToTile(sf::Vector2f coords);
+	virtual sf::Vector2f mapTileToCoords(sf::Vector2i coords);
 
-	sf::Vector2f mapAbsoluteToRelative(sf::Vector2f coords);
-	sf::Vector2f mapRelativeToAbsolute(sf::Vector2f coords);
+	virtual sf::Vector2f mapAbsoluteToRelative(sf::Vector2f coords);
+	virtual sf::Vector2f mapRelativeToAbsolute(sf::Vector2f coords);
+
+	virtual sf::Vector2f doCollision(float radius, sf::Vector2f coords);
 
 
 private:
@@ -68,4 +71,3 @@ private:
 
 	sf::RenderTexture* texture;
 };
-

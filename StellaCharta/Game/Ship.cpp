@@ -122,6 +122,10 @@ sf::Vector2f Ship::mapRelativeToAbsolute(sf::Vector2f coords) {
 	return sf::Vector2f();
 }
 
+sf::Vector2f Ship::doCollision(float radius, sf::Vector2f coords) {
+	return sf::Vector2f();
+}
+
 void Ship::refreshDimensions() {
 	double hw = (width*PIX) / 2;
 	double hh = (height*PIX) / 2;
