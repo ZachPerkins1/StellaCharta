@@ -11,6 +11,7 @@ Camera::~Camera() {
 void Camera::update() {
 	if (tracked) {
 		setPosition(trackingObject->getTrackingPos());
+		setRotation(trackingObject->getTrackingAngle());
 	}
 
 	window->setView(view);
@@ -22,6 +23,10 @@ void Camera::setPosition(sf::Vector2f pos) {
 
 void Camera::zoom(float scale) {
 	view.zoom(scale);
+}
+
+void Camera::setRotation(float rotation) {
+	view.setRotation(rotation);
 }
 
 void Camera::setTracking(ITrackable* object) {
@@ -38,6 +43,10 @@ sf::Vector2f Camera::getCenter() {
 
 sf::Vector2f Camera::getSize() {
 	return window->getView().getSize();
+}
+
+float Camera::getRotation() {
+	return window->getView().getRotation();
 }
 
 sf::Vector2f Camera::mapPixelToCoords(sf::Vector2i pos) {

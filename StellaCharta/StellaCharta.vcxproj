@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Entities\SpaceEntity.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Util.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -33,6 +34,7 @@
     <ClCompile Include="Game\PlayerManager.cpp" />
     <ClCompile Include="Game\Tiles\TextureMap.cpp" />
     <ClCompile Include="Game\World.cpp" />
+    <ClCompile Include="Game\Entities\WorldEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Tiles\Floor.h" />
@@ -47,6 +49,8 @@
     <ClInclude Include="Game\ITrackable.h" />
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Game\IWorld.h" />
+    <ClInclude Include="Game\Entities\SpaceEntity.h" />
+    <ClInclude Include="Game\Entities\WorldEntity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F091DA5C-CA06-4D6A-9C49-AD8A042E267F}</ProjectGuid>

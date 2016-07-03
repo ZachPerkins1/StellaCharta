@@ -20,10 +20,11 @@ void PlayingState::draw(sf::RenderTarget* target) {
 	ui->clear(sf::Color::Transparent);
 	game->clear(sf::Color::Black);
 
-	camera->update();
 	pManager->update();
+	ship->_update();
+	camera->update();
+
 	pManager->draw(ui);
-	ship->update();
 	ship->draw(game);
 
 	game->display();

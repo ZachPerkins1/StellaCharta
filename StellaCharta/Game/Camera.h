@@ -12,11 +12,13 @@ public:
 
 	void setPosition(sf::Vector2f pos);
 	void zoom(float scale);
+	void setRotation(float rotation);
 	void setTracking(ITrackable*);
 	void setTrackingEnabled(bool isTracked);
 
 	sf::Vector2f getCenter();
 	sf::Vector2f getSize();
+	float getRotation();
 
 	sf::Vector2f mapPixelToCoords(sf::Vector2i pos);
 	sf::Vector2i mapCoordsToPixel(sf::Vector2f pos);

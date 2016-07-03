@@ -7,6 +7,7 @@ public:
 	~ITrackable() {};
 
 	virtual sf::Vector2f getTrackingPos() = 0;
+	virtual float getTrackingAngle() = 0;
 
 };
 
