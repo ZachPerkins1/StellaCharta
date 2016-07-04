@@ -12,6 +12,7 @@ World::~World() {
 
 void World::update(float dt) {
 	for (int i = 0; i < worldMap.size(); i++) {
+		checkCollisions(i);
 		worldMap[i]->_update(dt);
 	}
 }
@@ -28,4 +29,16 @@ void World::addEntity(Entity* entity) {
 
 Entity* World::getEntityByIndex(int index) {
 	return worldMap[index];
+}
+
+void World::checkCollisions(int index) {
+	for (int i = index+1; i < worldMap.size(); i++) {
+		if (worldMap[index]->getGlobalBounds().intersects(worldMap[i]->getGlobalBounds())) {
+			processCollision(worldMap[i], worldMap[index]);
+		}
+	}
+}
+
+void World::processCollision(Entity* e1, Entity* e2) {
+
 }

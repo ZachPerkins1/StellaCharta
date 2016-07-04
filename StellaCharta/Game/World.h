@@ -24,6 +24,8 @@ private:
 	std::vector<sf::CircleShape>* starMap;
 	std::vector<Entity*> worldMap;
 
+	void checkCollisions(int index);
+	void processCollision(Entity* e1, Entity* e2);
 
 	Camera* camera;
 
