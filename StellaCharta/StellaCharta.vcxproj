@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Entities\SpaceEntity.cpp" />
+    <ClCompile Include="Game\Entities\Entity.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Util.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -30,26 +30,26 @@
     <ClCompile Include="Game\GameStateManager.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Game\States\PlayingState.cpp" />
-    <ClCompile Include="Game\Ship.cpp" />
+    <ClCompile Include="Game\Entities\Ship.cpp" />
     <ClCompile Include="Game\PlayerManager.cpp" />
     <ClCompile Include="Game\Tiles\TextureMap.cpp" />
     <ClCompile Include="Game\World.cpp" />
     <ClCompile Include="Game\Entities\WorldEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Entities\Entity.h" />
     <ClInclude Include="Game\Tiles\Floor.h" />
     <ClInclude Include="Game\Camera.h" />
     <ClInclude Include="Game\States\GameState.h" />
     <ClInclude Include="Game\GameStateManager.h" />
     <ClInclude Include="Game\States\PlayingState.h" />
-    <ClInclude Include="Game\Ship.h" />
+    <ClInclude Include="Game\Entities\Ship.h" />
     <ClInclude Include="Game\PlayerManager.h" />
     <ClInclude Include="Game\Tiles\Tile.h" />
     <ClInclude Include="Game\Tiles\TextureMap.h" />
     <ClInclude Include="Game\ITrackable.h" />
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Game\IWorld.h" />
-    <ClInclude Include="Game\Entities\SpaceEntity.h" />
     <ClInclude Include="Game\Entities\WorldEntity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

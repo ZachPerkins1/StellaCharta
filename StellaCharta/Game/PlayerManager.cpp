@@ -1,7 +1,7 @@
 #include "PlayerManager.h"
 #include "Tiles/TextureMap.h"
 
-PlayerManager::PlayerManager(Ship* ship, Camera* camera): ship(ship), camera(camera) {
+PlayerManager::PlayerManager(WorldEntity* ship, Camera* camera): ship(ship), camera(camera) {
 	font = new sf::Font();
 
 	if (!font->loadFromFile("resources/fonts/OpenSans-Regular.ttf")) {

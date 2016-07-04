@@ -1,20 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../Util.h"
-#include "../Tiles/Tile.h"
-#include "../Tiles/TextureMap.h"
-#include "../Tiles/Floor.h"
-#include <cmath>
-#include "../ITrackable.h"
-#include "../IWorld.h"
-
+#include "Entity.h"
 
 #define M_PI 3.141592653589793238462643383279502884197169399375105820974
 
 //Represents something inside of a SpaceEntity
-class WorldEntity : public sf::Sprite, public ITrackable {
+class WorldEntity : public ITrackable, public Entity {
 public:
-	WorldEntity(int width, int height);
+	WorldEntity(float x, float y, int width, int height);
 	~WorldEntity();
 
 	void draw(sf::RenderTarget* target);

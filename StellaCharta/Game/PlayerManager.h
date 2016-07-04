@@ -1,11 +1,11 @@
 #pragma once
-#include "Ship.h"
+#include "Entities/Ship.h"
 #include "Camera.h"
 #include <sstream>
 
 class PlayerManager {
 public:
-	PlayerManager(Ship* ship, Camera* camera);
+	PlayerManager(WorldEntity* ship, Camera* camera);
 	~PlayerManager();
 
 	void draw(sf::RenderTarget*);
@@ -14,7 +14,7 @@ public:
 	void onEvent(sf::Event e);
 
 private:
-	Ship* ship;
+	WorldEntity* ship;
 	Camera* camera;
 
 	sf::Font* font;

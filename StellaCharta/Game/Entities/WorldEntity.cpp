@@ -1,6 +1,6 @@
 #include "WorldEntity.h"
 
-WorldEntity::WorldEntity(int width, int height) {
+WorldEntity::WorldEntity(float x, float y, int width, int height) : Entity(x, y) {
 	tileMap = new Tile**[width];
 	floorMap = new Floor**[width];
 
@@ -26,6 +26,8 @@ WorldEntity::WorldEntity(int width, int height) {
 	this->height = height;
 
 	refreshDimensions();
+
+	selector = sf::Vector2i(-1, -1);
 
 	floorMap[0][0]->setSubID(1);
 }

@@ -1,8 +1,9 @@
 #pragma once
-#include "../Ship.h"
+#include "../Entities/Ship.h"
 #include "GameState.h"
 #include "../PlayerManager.h"
 #include "../Camera.h"
+#include "../World.h"
 
 class PlayingState : public GameState {
 public:
@@ -14,7 +15,7 @@ public:
 	virtual void onEvent(sf::Event);
 
 private:
-	Ship* ship;
+	World* world;
 	PlayerManager* pManager;
 	Camera* camera;
 

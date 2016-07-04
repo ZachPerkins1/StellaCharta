@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Entities/WorldEntity.h"
+#include "WorldEntity.h"
 
 class Ship : public WorldEntity {
 public:
-	Ship();
+	Ship(float x, float y, int width, int height);
 	//TODO: Map(std::string file)
 
 	~Ship();

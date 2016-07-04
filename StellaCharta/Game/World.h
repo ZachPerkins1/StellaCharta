@@ -1,5 +1,5 @@
 #pragma once
-#include "Ship.h"
+#include "Entities/Ship.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
@@ -12,6 +12,9 @@ public:
 	void update();
 	void draw(sf::RenderTarget* target);
 
+	void addWorldEntity(WorldEntity* entity);
+	WorldEntity* getWorldEntityByIndex(int index);
+
 private:
 	struct StarSquare {
 		sf::Vector2i coords;
@@ -19,7 +22,8 @@ private:
 	};
 
 	std::vector<sf::CircleShape>* starMap;
-	std::vector<Ship>* shipMap;
+	std::vector<WorldEntity*> worldMap;
+
 
 	Camera* camera;
 
