@@ -22,6 +22,8 @@ private:
 	GameState** states;
 	const int STATE_COUNT = 1;
 
+	float dt = 0;
+
 	void initWindow();
 	void startLoop();
 

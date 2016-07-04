@@ -34,7 +34,7 @@ double Entity::getdrot() {
 	return drot;
 }
 
-void Entity::moveEntity() {
-	this->move(sf::Vector2f(dx, dy));
-	this->rotate(drot);
+void Entity::moveEntity(float dt) {
+	this->move(sf::Vector2f(dx*dt*32, dy*dt*32));
+	this->rotate(drot*dt);
 }

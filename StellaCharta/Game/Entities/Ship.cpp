@@ -7,5 +7,5 @@ Ship::Ship(float x, float y, int width, int height) : WorldEntity(x, y, width, h
 Ship::~Ship() {
 }
 
-void Ship::update() {
+void Ship::update(float dt) {
 }

@@ -21,7 +21,10 @@ public:
 	double getdy();
 	double getdrot();
 
-	void moveEntity();
+	void moveEntity(float dt);
+
+	virtual void draw(sf::RenderTarget* target) = 0;
+	virtual void _update(float dt) = 0;
 
 private:
 	double dx;

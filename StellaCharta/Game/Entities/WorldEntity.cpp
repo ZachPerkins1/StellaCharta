@@ -54,8 +54,9 @@ void WorldEntity::draw(sf::RenderTarget * target) {
 	target->draw(*this);
 }
 
-void WorldEntity::_update() {
-	update();
+void WorldEntity::_update(float dt) {
+	moveEntity(dt);
+	update(dt);
 }
 
 sf::Vector2f WorldEntity::getTrackingPos() {

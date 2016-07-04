@@ -11,7 +11,7 @@ public:
 	~PlayingState();
 
 	virtual void draw(sf::RenderTarget*);
-	virtual void update();
+	virtual void update(float dt);
 	virtual void onEvent(sf::Event);
 
 private:

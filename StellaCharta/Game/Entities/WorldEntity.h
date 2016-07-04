@@ -10,8 +10,8 @@ public:
 	~WorldEntity();
 
 	void draw(sf::RenderTarget* target);
-	void _update();
-	virtual void update() = 0;
+	void _update(float dt);
+	virtual void update(float dt) = 0;
 
 	virtual sf::Vector2i mapCoordsToTile(sf::Vector2f coords);
 	virtual sf::Vector2f mapTileToCoords(sf::Vector2i coords);

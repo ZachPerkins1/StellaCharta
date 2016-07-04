@@ -8,7 +8,7 @@ Camera::Camera(sf::RenderTexture* window):
 Camera::~Camera() {
 }
 
-void Camera::update() {
+void Camera::update(float dt) {
 	if (tracked) {
 		setPosition(trackingObject->getTrackingPos());
 		setRotation(trackingObject->getTrackingAngle());

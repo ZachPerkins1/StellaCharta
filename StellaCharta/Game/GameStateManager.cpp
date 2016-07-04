@@ -31,13 +31,14 @@ void GameStateManager::startLoop() {
 			}
 		}
 
-		states[currState]->update();
+		states[currState]->update(dt);
 		states[currState]->draw(window);
 
 		window->display();
 
-		int wait = 16 - clock.getElapsedTime().asMilliseconds();
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait >= 0 ? wait : 0));
+		dt = clock.getElapsedTime().asSeconds();
+
+		//std::this_thread::sleep_for(std::chrono::milliseconds(wait >= 0 ? wait : 0));
 
 	}
 }

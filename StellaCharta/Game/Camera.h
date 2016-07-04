@@ -8,7 +8,7 @@ public:
 	Camera(sf::RenderTexture* window);
 	~Camera();
 
-	void update();
+	void update(float dt);
 
 	void setPosition(sf::Vector2f pos);
 	void zoom(float scale);

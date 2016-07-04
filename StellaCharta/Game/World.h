@@ -9,11 +9,11 @@ public:
 	World(Camera* cam);
 	~World();
 	
-	void update();
+	void update(float dt);
 	void draw(sf::RenderTarget* target);
 
-	void addWorldEntity(WorldEntity* entity);
-	WorldEntity* getWorldEntityByIndex(int index);
+	void addEntity(Entity* entity);
+	Entity* getEntityByIndex(int index);
 
 private:
 	struct StarSquare {
@@ -22,7 +22,7 @@ private:
 	};
 
 	std::vector<sf::CircleShape>* starMap;
-	std::vector<WorldEntity*> worldMap;
+	std::vector<Entity*> worldMap;
 
 
 	Camera* camera;

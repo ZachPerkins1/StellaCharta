@@ -6,13 +6,16 @@ PlayingState::PlayingState(sf::RenderWindow* window):
 	game->create(window->getSize().x, window->getSize().y);
 	ui->create(window->getSize().x, window->getSize().y);
 	camera = new Camera(game);
-	
-	world->addWorldEntity(new Ship())
-	pManager = new PlayerManager(world->getWorldEntityByIndex(0), camera);
+
+	world = new World(camera);
+	world->addEntity(new Ship(100, 400, 5, 5));
+	world->addEntity(new Ship(900, 400, 5, 5));
+	pManager = new PlayerManager((Ship*)(world->getEntityByIndex(0)), camera);
 	TextureMap t;
 
-	ship->setPosition(100, 100);
-	ship2->setPosition(300, 200);
+	world->getEntityByIndex(0)->setdx(10);
+	world->getEntityByIndex(1)->setdx(-10);
+
 }
 
 PlayingState::~PlayingState() {
@@ -25,8 +28,7 @@ void PlayingState::draw(sf::RenderTarget* target) {
 	game->clear(sf::Color::Black);
 
 	pManager->draw(ui);
-	ship->draw(game);
-	ship2->draw(game);
+	world->draw(game);
 
 	game->display();
 	ui->display();
@@ -48,11 +50,9 @@ void PlayingState::onEvent(sf::Event event) {
 	pManager->onEvent(event);
 }
 
-void PlayingState::update() {
-	ship->rotate(0.2);
-	pManager->update();
-	ship->_update();
-	ship2->_update();
-	camera->update();
+void PlayingState::update(float dt) {
+	pManager->update(dt);
+	world->update(dt);
+	camera->update(dt);
 }
 

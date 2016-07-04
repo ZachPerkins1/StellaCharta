@@ -2,7 +2,7 @@
 
 World::World(Camera* cam) :
 	starMap(new std::vector<sf::CircleShape>),
-	worldMap(std::vector<WorldEntity*>()),
+	worldMap(std::vector<Entity*>()),
 	camera(cam) {
 }
 
@@ -10,9 +10,9 @@ World::World(Camera* cam) :
 World::~World() {
 }
 
-void World::update() {
+void World::update(float dt) {
 	for (int i = 0; i < worldMap.size(); i++) {
-		worldMap[i]->_update();
+		worldMap[i]->_update(dt);
 	}
 }
 
@@ -22,10 +22,10 @@ void World::draw(sf::RenderTarget* target) {
 	}
 }
 
-void World::addWorldEntity(WorldEntity* entity) {
+void World::addEntity(Entity* entity) {
 	worldMap.push_back(entity);
 }
 
-WorldEntity* World::getWorldEntityByIndex(int index) {
+Entity* World::getEntityByIndex(int index) {
 	return worldMap[index];
 }

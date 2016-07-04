@@ -9,7 +9,7 @@ PlayerManager::PlayerManager(WorldEntity* ship, Camera* camera): ship(ship), cam
 	}
 
 	if (ship != nullptr) {
-		camera->setTrackingEnabled(true);
+		camera->setTrackingEnabled(false);
 		camera->setTracking(ship);
 	}
 }
@@ -23,7 +23,7 @@ void PlayerManager::draw(sf::RenderTarget* target) {
 	
 }
 
-void PlayerManager::update() {
+void PlayerManager::update(float dt) {
 	ship->setSelector(selected);
 }
 

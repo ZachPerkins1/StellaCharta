@@ -9,7 +9,7 @@ public:
 
 	~Ship();
 
-	void update();
+	void update(float dt);
 private:
 
 };

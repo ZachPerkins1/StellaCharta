@@ -9,7 +9,7 @@ public:
 	~PlayerManager();
 
 	void draw(sf::RenderTarget*);
-	void update();
+	void update(float dt);
 
 	void onEvent(sf::Event e);
 
