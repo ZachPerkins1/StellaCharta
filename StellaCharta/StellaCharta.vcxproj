@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Tiles\CollisionTile.cpp" />
-    <ClCompile Include="Game\Entities\CollisionBox.cpp" />
+    <ClCompile Include="Game\Entities\Collisions\CollisionBox.cpp" />
     <ClCompile Include="Game\Entities\Entity.cpp" />
+    <ClCompile Include="Game\Entities\Collisions\Line.cpp" />
+    <ClCompile Include="Game\Entities\Collisions\Segment.cpp" />
     <ClCompile Include="TextureRegistry.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Util.h">
@@ -41,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Tiles\CollisionTile.h" />
-    <ClInclude Include="Game\Entities\CollisionBox.h" />
+    <ClInclude Include="Game\Entities\Collisions\CollisionBox.h" />
     <ClInclude Include="Game\Entities\Entity.h" />
     <ClInclude Include="Game\Tiles\Floor.h" />
     <ClInclude Include="Game\Camera.h" />
@@ -56,6 +58,8 @@
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Game\IWorld.h" />
     <ClInclude Include="Game\Entities\WorldEntity.h" />
+    <ClInclude Include="Game\Entities\Collisions\Line.h" />
+    <ClInclude Include="Game\Entities\Collisions\Segment.h" />
     <ClInclude Include="TextureRegistry.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
