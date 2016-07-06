@@ -62,7 +62,6 @@ void World::checkCollisions(int index, float dt) {
 void World::processCollision(Entity* e1, Entity* e2, float dt) {
 	e1->moveEntity(-dt);
 	
-		
 }
 
 sf::FloatRect World::formBoundingRect(sf::FloatRect r1, sf::FloatRect r2) {

@@ -25,6 +25,7 @@ WorldEntity::WorldEntity(float x, float y, int width, int height) : Entity(x, y)
 	this->width = width;
 	this->height = height;
 
+	setTexture(texture->getTexture());
 	refreshDimensions();
 
 	selector = sf::Vector2i(-1, -1);
@@ -92,44 +93,6 @@ void WorldEntity::drawSelector(int x, int y) {
 	texture->draw(rect);
 }
 
-sf::Vector2f WorldEntity::mapAbsoluteToRelative(sf::Vector2f coords) {
-	sf::Vector2f center = getPosition();
-	double dist = sqrt(pow(coords.x - center.x, 2) + pow(coords.y - center.y, 2));
-
-	if (dist <= lenDiag) {
-		Corners c = getCorners();
-
-		sf::Vector2f topPoint = util::nearestPoint(coords, c.ul, c.ur);
-		sf::Vector2f leftPoint = util::nearestPoint(coords, c.ul, c.ll);
-
-		if (util::liesOnSegment(topPoint, c.ul, c.ur, 0.1) && util::liesOnSegment(leftPoint, c.ul, c.ll, 0.1)) {
-			return sf::Vector2f(util::dist(leftPoint, coords), util::dist(topPoint, coords));
-		}
-	}
-
-	return sf::Vector2f(-1, -1);
-}
-
-sf::Vector2f WorldEntity::mapRelativeToAbsolute(sf::Vector2f coords) {
-	sf::Vector2f point = getCorners().ul;
-
-	double theta = DEG_TO_RAD * getRotation();
-	
-	double dx1 = (coords.x * cos(theta));
-	double dy1 = (coords.x * sin(theta));
-
-	double x1 = point.x + dx1;
-	double y1 = point.y + dy1;
-
-	double dx2 = (coords.y * sin(theta));
-	double dy2 = (coords.y * cos(theta));
-
-	double x2 = x1 - dx2;
-	double y2 = y1 + dy2;
-
-	return sf::Vector2f(x2, y2);
-}
-
 sf::Vector2i WorldEntity::mapCoordsToTile(sf::Vector2f coords) {
 	int x = ((int)coords.x) / PIX;
 	int y = ((int)coords.y) / PIX;
@@ -140,40 +103,4 @@ sf::Vector2f WorldEntity::mapTileToCoords(sf::Vector2i coords) {
 	double x = coords.x * PIX;
 	double y = coords.y * PIX;
 	return sf::Vector2f(x, y);
-}
-
-WorldEntity::Corners WorldEntity::getCorners() {
-	sf::Vector2f center = getPosition();
-	Corners corners;
-	double theta = getRotation() + angDiag;
-
-	if (theta > 360)
-		theta -= 360;
-
-	double dx = -(lenDiag * cos(DEG_TO_RAD * theta));
-	double dy = -(lenDiag * sin(DEG_TO_RAD * theta));
-	corners.ul = sf::Vector2f(center.x + dx, center.y + dy);
-
-	theta = getRotation();
-	double r_theta = theta * DEG_TO_RAD;
-
-	dx = (width*PIX) * cos(r_theta);
-	dy = ((width*PIX) * sin(r_theta));
-
-	corners.ur = sf::Vector2f(corners.ul.x + dx, corners.ul.y + dy);
-
-	dx = -((height*PIX) * sin(r_theta));
-	dy = (height*PIX) * cos(r_theta);
-
-	corners.ll = sf::Vector2f(corners.ul.x + dx, corners.ul.y + dy);
-
-	return corners;
-}
-
-void WorldEntity::refreshDimensions() {
-	double hw = (width*PIX) / 2;
-	double hh = (height*PIX) / 2;
-
-	lenDiag = sqrt(pow(hw, 2) + pow(hh, 2));
-	angDiag = RAD_TO_DEG * atan(hh / hw);
 }

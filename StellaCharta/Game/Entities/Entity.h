@@ -8,6 +8,8 @@
 #include "../ITrackable.h"
 #include "../IWorld.h"
 
+#define M_PI 3.141592653589793238462643383279502884197169399375105820974
+
 class Entity : public sf::Sprite {
 public:
 	Entity(float x, float y);
@@ -33,12 +35,32 @@ public:
 	virtual void draw(sf::RenderTarget* target) = 0;
 	virtual void _update(float dt) = 0;
 
+	virtual sf::Vector2f mapAbsoluteToRelative(sf::Vector2f coords);
+	virtual sf::Vector2f mapRelativeToAbsolute(sf::Vector2f coords);
+
+	
 private:
+	double lenDiag;
+	double angDiag;
+
 	double dx; // m/s
 	double dy;
 
 	double drot; // deg/s
 
 	double mass; // kg
+
+	const double DEG_TO_RAD = M_PI / 180;
+	const double RAD_TO_DEG = 180 / M_PI;
+
+protected:
+	struct Corners {
+		sf::Vector2f ur;
+		sf::Vector2f ll;
+		sf::Vector2f ul;
+	};
+
+	Corners getCorners();
+	void refreshDimensions();
 
 };

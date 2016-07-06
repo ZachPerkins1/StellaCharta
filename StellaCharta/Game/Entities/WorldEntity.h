@@ -16,9 +16,6 @@ public:
 	virtual sf::Vector2i mapCoordsToTile(sf::Vector2f coords);
 	virtual sf::Vector2f mapTileToCoords(sf::Vector2i coords);
 
-	virtual sf::Vector2f mapAbsoluteToRelative(sf::Vector2f coords);
-	virtual sf::Vector2f mapRelativeToAbsolute(sf::Vector2f coords);
-
 	void setSelector(sf::Vector2i pos);
 
 	virtual sf::Vector2f getTrackingPos();
@@ -30,20 +27,8 @@ public:
 	};
 
 private:
-	struct Corners {
-		sf::Vector2f ur;
-		sf::Vector2f ll;
-		sf::Vector2f ul;
-	};
-
-	Corners getCorners();
-	void refreshDimensions();
-
 	void renderTile(Tile* tile, int x, int y);
 	void drawSelector(int x, int y);
-
-	const double DEG_TO_RAD = M_PI / 180;
-	const double RAD_TO_DEG = 180 / M_PI;
 
 	const int PIX = Tile::SIZE;
 
