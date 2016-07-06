@@ -45,7 +45,7 @@ private:
 	const double DEG_TO_RAD = M_PI / 180;
 	const double RAD_TO_DEG = 180 / M_PI;
 
-	const int PIX = 32;
+	const int PIX = Tile::SIZE;
 
 	double lenDiag;
 	double angDiag;

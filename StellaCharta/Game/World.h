@@ -1,6 +1,7 @@
 #pragma once
 #include "Entities/Ship.h"
 #include <vector>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
 
@@ -24,8 +25,10 @@ private:
 	std::vector<sf::CircleShape>* starMap;
 	std::vector<Entity*> worldMap;
 
-	void checkCollisions(int index);
-	void processCollision(Entity* e1, Entity* e2);
+	void checkCollisions(int index, float dt);
+	void processCollision(Entity* e1, Entity* e2, float dt);
+
+	sf::FloatRect formBoundingRect(sf::FloatRect r1, sf::FloatRect r2);
 
 	Camera* camera;
 

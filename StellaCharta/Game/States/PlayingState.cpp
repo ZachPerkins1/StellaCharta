@@ -13,9 +13,10 @@ PlayingState::PlayingState(sf::RenderWindow* window):
 	pManager = new PlayerManager((Ship*)(world->getEntityByIndex(0)), camera);
 	TextureMap t;
 
-	world->getEntityByIndex(0)->setdx(1);
-	world->getEntityByIndex(1)->setdx(-1);
-
+	world->getEntityByIndex(0)->rotate(20);
+	world->getEntityByIndex(0)->setdx(5);
+	world->getEntityByIndex(1)->setdx(-5);
+	//world->getEntityByIndex(1)->setdx(-10);
 }
 
 PlayingState::~PlayingState() {

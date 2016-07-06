@@ -21,6 +21,9 @@ private:
 
 	sf::Vector2i selected;
 
+	sf::Uint32 fps = 0;
+	double time = 0.2;
+
 	void select(int px, int py);
 
 };

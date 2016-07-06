@@ -111,7 +111,23 @@ sf::Vector2f WorldEntity::mapAbsoluteToRelative(sf::Vector2f coords) {
 }
 
 sf::Vector2f WorldEntity::mapRelativeToAbsolute(sf::Vector2f coords) {
-	return sf::Vector2f();
+	sf::Vector2f point = getCorners().ul;
+
+	double theta = DEG_TO_RAD * getRotation();
+	
+	double dx1 = (coords.x * cos(theta));
+	double dy1 = (coords.x * sin(theta));
+
+	double x1 = point.x + dx1;
+	double y1 = point.y + dy1;
+
+	double dx2 = (coords.y * sin(theta));
+	double dy2 = (coords.y * cos(theta));
+
+	double x2 = x1 - dx2;
+	double y2 = y1 + dy2;
+
+	return sf::Vector2f(x2, y2);
 }
 
 sf::Vector2i WorldEntity::mapCoordsToTile(sf::Vector2f coords) {
@@ -161,6 +177,3 @@ void WorldEntity::refreshDimensions() {
 	lenDiag = sqrt(pow(hw, 2) + pow(hh, 2));
 	angDiag = RAD_TO_DEG * atan(hh / hw);
 }
-
-
-

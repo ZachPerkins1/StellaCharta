@@ -22,6 +22,14 @@ void Entity::setdrot(double drot) {
 	this->drot = drot;
 }
 
+void Entity::setMass(double mass) {
+	this->mass = mass;
+}
+
+void Entity::addMass(double mass) {
+	this->mass += mass;
+}
+
 double Entity::getdx() {
 	return dx;
 }
@@ -34,7 +42,11 @@ double Entity::getdrot() {
 	return drot;
 }
 
+double Entity::getMass() {
+	return mass;
+}
+
 void Entity::moveEntity(float dt) {
-	this->move(sf::Vector2f(dx*dt*32, dy*dt*32));
+	this->move(sf::Vector2f(dx*dt*Tile::SIZE, dy*dt*Tile::SIZE));
 	this->rotate(drot*dt);
 }

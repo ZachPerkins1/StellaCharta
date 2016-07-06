@@ -20,11 +20,23 @@ PlayerManager::~PlayerManager() {
 }
 
 void PlayerManager::draw(sf::RenderTarget* target) {
+	std::stringstream ss;
+	ss << fps;
+	sf::Text t(sf::String(ss.str()), *font);
+	t.setPosition(3, 1);
+	target->draw(t);
 	
 }
 
 void PlayerManager::update(float dt) {
 	ship->setSelector(selected);
+
+	if (time >= 0.4) {
+		time = 0;
+		fps = ceil((fps + ceil(1 / dt)) / 2);
+	}
+
+	time += dt;
 }
 
 void PlayerManager::onEvent(sf::Event e) {
@@ -47,6 +59,8 @@ void PlayerManager::onEvent(sf::Event e) {
 void PlayerManager::select(int px, int py) {
 	sf::Vector2f coords = camera->mapPixelToCoords(sf::Vector2i(px, py));
 	sf::Vector2f rel = ship->mapAbsoluteToRelative(coords);
+	sf::Vector2f abs = ship->mapRelativeToAbsolute(rel);
+
 	if (rel.x != -1)
 		selected = ship->mapCoordsToTile(rel);
 	else

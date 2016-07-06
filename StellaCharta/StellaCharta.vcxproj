@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Tiles\CollisionTile.cpp" />
+    <ClCompile Include="Game\Entities\CollisionBox.cpp" />
     <ClCompile Include="Game\Entities\Entity.cpp" />
+    <ClCompile Include="TextureRegistry.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Util.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -37,6 +40,8 @@
     <ClCompile Include="Game\Entities\WorldEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Tiles\CollisionTile.h" />
+    <ClInclude Include="Game\Entities\CollisionBox.h" />
     <ClInclude Include="Game\Entities\Entity.h" />
     <ClInclude Include="Game\Tiles\Floor.h" />
     <ClInclude Include="Game\Camera.h" />
@@ -51,6 +56,7 @@
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Game\IWorld.h" />
     <ClInclude Include="Game\Entities\WorldEntity.h" />
+    <ClInclude Include="TextureRegistry.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F091DA5C-CA06-4D6A-9C49-AD8A042E267F}</ProjectGuid>

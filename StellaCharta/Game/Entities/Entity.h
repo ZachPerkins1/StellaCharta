@@ -15,11 +15,18 @@ public:
 
 	void setdx(double dx);
 	void setdy(double dy);
+
 	void setdrot(double drot);
+
+	void setMass(double mass);
+	void addMass(double mass);
 
 	double getdx();
 	double getdy();
+
 	double getdrot();
+
+	double getMass();
 
 	void moveEntity(float dt);
 
@@ -27,9 +34,11 @@ public:
 	virtual void _update(float dt) = 0;
 
 private:
-	double dx;
+	double dx; // m/s
 	double dy;
-	double drot;
+
+	double drot; // deg/s
+
+	double mass; // kg
 
 };
-
