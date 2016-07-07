@@ -28,6 +28,7 @@ private:
 	void checkCollisions(int index, float dt);
 	void processCollision(Entity* e1, Entity* e2, float dt);
 
+	std::vector<sf::Vector2f> rayCast(Entity* s, Entity* r);
 	sf::FloatRect formBoundingRect(sf::FloatRect r1, sf::FloatRect r2);
 
 	Camera* camera;

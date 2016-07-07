@@ -61,9 +61,13 @@ void World::checkCollisions(int index, float dt) {
 
 void World::processCollision(Entity* e1, Entity* e2, float dt) {
 	e1->moveEntity(-dt);
-	
 }
 
+std::vector<sf::Vector2f> World::rayCast(Entity* s, Entity* r) {
+
+}
+
+// BoxCasting(TM)
 sf::FloatRect World::formBoundingRect(sf::FloatRect r1, sf::FloatRect r2) {
 	float left = std::min(r1.left, r2.left);
 	float top = std::min(r1.top, r2.top);
