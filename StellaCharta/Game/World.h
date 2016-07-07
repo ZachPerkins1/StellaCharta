@@ -1,6 +1,5 @@
 #pragma once
 #include "Entities/Ship.h"
-#include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"

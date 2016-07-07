@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include "Tile.h"

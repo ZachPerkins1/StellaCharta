@@ -1,6 +1,6 @@
 #pragma once
+#include "../../../Utility.h"
 #include <SFML/Graphics.hpp>
-#include "../../../Util.h"
 
 class Segment {
 public:

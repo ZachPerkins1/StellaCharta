@@ -64,7 +64,7 @@ void World::processCollision(Entity* e1, Entity* e2, float dt) {
 }
 
 std::vector<sf::Vector2f> World::rayCast(Entity* s, Entity* r) {
-
+	return std::vector<sf::Vector2f>();
 }
 
 // BoxCasting(TM)

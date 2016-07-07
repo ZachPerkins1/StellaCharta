@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "Collisions/CollisionBox.h"
+#include <SFML/Graphics.hpp>
 #include "../Tiles/Tile.h"
 #include "../Tiles/TextureMap.h"
 #include "../Tiles/Floor.h"

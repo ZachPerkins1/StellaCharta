@@ -28,6 +28,24 @@ void PlayingState::draw(sf::RenderTarget* target) {
 	ui->clear(sf::Color::Transparent);
 	game->clear(sf::Color::Black);
 
+	camera->setPosition(sf::Vector2f(0, 0));
+
+	for (int i = 0; i < points.size(); i++) {
+		sf::CircleShape c(1);
+		c.setFillColor(sf::Color::Red);
+		c.setPosition(points[i]);
+		game->draw(c);
+	}
+
+	std::vector<sf::Vector2f> hull = utility::convexHull(points);
+	
+	for (int i = 0; i < hull.size(); i++) {
+		sf::CircleShape c(1);
+		c.setFillColor(sf::Color::Green);
+		c.setPosition(hull[i]);
+		game->draw(c);
+	}
+
 	pManager->draw(ui);
 	world->draw(game);
 
@@ -45,8 +63,9 @@ void PlayingState::draw(sf::RenderTarget* target) {
 }
 
 void PlayingState::onEvent(sf::Event event) {
-	//if (event.type == sf::Event::MouseButtonPressed)
-	//	ship->cTile(event.mouseButton.x, event.mouseButton.y);
+	if (event.type == sf::Event::MouseButtonPressed)
+		points.push_back(camera->mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y)));
+
 
 	pManager->onEvent(event);
 }

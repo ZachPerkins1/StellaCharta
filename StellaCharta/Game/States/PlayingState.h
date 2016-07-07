@@ -21,5 +21,7 @@ private:
 
 	sf::RenderTexture* ui;
 	sf::RenderTexture* game;
+
+	std::vector<sf::Vector2f> points;
 };
 

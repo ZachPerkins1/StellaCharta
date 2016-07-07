@@ -10,5 +10,5 @@ Segment::~Segment() {
 }
 
 bool Segment::intersects(Segment s, sf::Vector2f* intersection) {
-	return util::segmentIntersects(p1, p2, s.p1, s.p2, intersection);
+	return utility::segmentIntersects(p1, p2, s.p1, s.p2, intersection);
 }

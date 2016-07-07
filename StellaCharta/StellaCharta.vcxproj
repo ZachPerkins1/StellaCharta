@@ -25,10 +25,6 @@
     <ClCompile Include="Game\Entities\Collisions\Line.cpp" />
     <ClCompile Include="Game\Entities\Collisions\Segment.cpp" />
     <ClCompile Include="TextureRegistry.cpp" />
-    <ClCompile Include="Util.cpp" />
-    <ClCompile Include="Util.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Game\Tiles\Floor.cpp" />
     <ClCompile Include="Game\Camera.cpp" />
     <ClCompile Include="Game\States\GameState.cpp" />
@@ -40,6 +36,7 @@
     <ClCompile Include="Game\Tiles\TextureMap.cpp" />
     <ClCompile Include="Game\World.cpp" />
     <ClCompile Include="Game\Entities\WorldEntity.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Tiles\CollisionTile.h" />
@@ -61,6 +58,7 @@
     <ClInclude Include="Game\Entities\Collisions\Line.h" />
     <ClInclude Include="Game\Entities\Collisions\Segment.h" />
     <ClInclude Include="TextureRegistry.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F091DA5C-CA06-4D6A-9C49-AD8A042E267F}</ProjectGuid>
