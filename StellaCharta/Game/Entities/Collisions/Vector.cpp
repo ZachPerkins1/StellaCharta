@@ -40,3 +40,12 @@ float Vector::mag() {
 	return std::sqrt(magSq());
 }
 
+bool Vector::isZero() {
+	bool xIsZero = abs(x) < 1e-10;
+	bool yIsZero = abs(y) < 1e-10;
+
+	return xIsZero && yIsZero;
+}
+
+
+

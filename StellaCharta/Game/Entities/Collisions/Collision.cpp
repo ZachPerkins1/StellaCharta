@@ -82,6 +82,11 @@ bool Collision::containsOrigin(std::vector<Vector>* simplex, Vector * ndir) {
 	return false;
 }
 
+Vector Collision::closestPointToOrigin(Vector a, Vector b) {
+	Vector v = utility::nearestPoint(Vector(0, 0), a, b);
+	return v;
+}
+
 Vector Collision::support(Polygon p1, Polygon p2, Vector sd) {
 	Vector a = p1.support(sd);
 	Vector b = p2.support(-sd);
@@ -91,11 +96,8 @@ Vector Collision::support(Polygon p1, Polygon p2, Vector sd) {
 	return md;
 }
 
-Collision::GJKResult Collision::gjk(Polygon p1, Polygon p2) {
-	GJKResult result;
-	result.intersecting = false;
+bool Collision::gjkIntersection(Polygon p1, Polygon p2) {
 	if (p1.vertexCount() > 0 && p2.vertexCount() > 0) {
-		bool finished = false;
 		std::vector<Vector>* simplex = new std::vector<Vector>;
 
 		Vector sd(1, -1); //really any direction
@@ -103,24 +105,69 @@ Collision::GJKResult Collision::gjk(Polygon p1, Polygon p2) {
 
 		sd = -sd;
 
-		while (!finished) {
+		while (true) {
 			simplex->push_back(support(p1, p2, sd));
 
 			if ((*simplex)[simplex->size() - 1] * sd > 0) {
 				if (containsOrigin(simplex, &sd)) {
-					result.intersecting = true;
-					finished = true;
+					return true;
 				}
 			}
 			else {
-				result.dist = 2;
-				result.simplex = *simplex;
-				finished = true;
+				return false;
 			}
 		}
 
-		return result;
 	}
+}
 
-	return result;
+double Collision::gjkDistance(Polygon p1, Polygon p2) {
+	if (p1.vertexCount() > 0 && p2.vertexCount() > 0) {
+		Vector a;
+		Vector b;
+		Vector c;
+
+		Vector sd(1, -1); //really any direction
+
+		a = support(p1, p2, sd);
+		sd = -sd;
+		b = support(p1, p2, sd);
+
+		sd = closestPointToOrigin(a, b);
+
+		while (true) {
+
+			sd = -sd;
+			if (sd.isZero())
+				return -1;
+
+			c = support(p1, p2, sd);
+
+			//Our last try
+			double da = a * sd;
+
+			// Our current try
+			double dc = c * sd;
+
+			//Difference between the tries
+			double diff = dc - da;
+
+			if (diff < TOLERANCE) {
+				return sd.mag();
+			}
+
+			Vector p1 = closestPointToOrigin(a, c);
+			Vector p2 = closestPointToOrigin(c, b);
+
+			if (p1.magSq() < p2.magSq()) {
+				b = c;
+				sd = p1;
+			}
+			else {
+				a = c;
+				sd = p2;
+			}
+		}
+
+	}
 }

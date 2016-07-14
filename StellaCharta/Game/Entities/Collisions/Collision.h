@@ -12,22 +12,23 @@ public:
 	bool detect();
 	void resolve();
 
-	struct GJKResult {
-		bool intersecting;
-		float dist;
-		std::vector<Vector> simplex;
-	};
+	Vector support(Polygon p1, Polygon p2, Vector sd);
 
 	bool containsOrigin(std::vector<Vector>* simplex, Vector* ndir);
-	Vector support(Polygon p1, Polygon p2, Vector sd);
-	GJKResult gjk(Polygon p1, Polygon p2);
+	Vector closestPointToOrigin(Vector a, Vector b);
+
+	bool gjkIntersection(Polygon p1, Polygon p2);
+	double gjkDistance(Polygon p1, Polygon p2);
 
 private:
+
 	Entity* a;
 	Entity* b;
 
 	sf::Vector2f collisionPoint;
 	bool hasPoint = false;
+
+	const double TOLERANCE = 200;
 
 };
 

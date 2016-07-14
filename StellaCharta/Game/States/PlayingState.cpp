@@ -13,7 +13,7 @@ PlayingState::PlayingState(sf::RenderWindow* window):
 	pManager = new PlayerManager((Ship*)(world->getEntityByIndex(0)), camera);
 	TextureMap t;
 
-	//world->getEntityByIndex(0)->rotate(20);
+	world->getEntityByIndex(0)->rotate(20);
 	//world->getEntityByIndex(0)->setdx(5);
 	//world->getEntityByIndex(1)->setdx(-5);
 	//world->getEntityByIndex(1)->setdx(-10);
@@ -49,8 +49,8 @@ void PlayingState::draw(sf::RenderTarget* target) {
 	}
 
 	Collision c;
-	Collision::GJKResult res = c.gjk(shape, triangle);
-	drender::drawShape(game, res.simplex, sf::Color::Red);
+	double res = c.gjkDistance(triangle, shape);
+	//drender::drawShape(game, res.simplex, sf::Color::Red);
 
 	pManager->draw(ui);
 	world->draw(game);

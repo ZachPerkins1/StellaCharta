@@ -18,5 +18,7 @@ public:
 	float cross(const Vector& other);
 	float magSq();
 	float mag();
+
+	bool isZero();
 };
 
