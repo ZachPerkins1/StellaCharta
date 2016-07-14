@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 Entity::Entity(float x, float y) {
+	mesh = new CollisionBox();
 	setPosition(x, y);
 	dx = 0;
 	dy = 0;
@@ -129,18 +130,23 @@ void Entity::refreshDimensions() {
 
 	lenDiag = sqrt(pow(hw, 2) + pow(hh, 2));
 	angDiag = RAD_TO_DEG * atan(hh / hw);
+
+	mesh->getBox()->addPoint(0, 0);
+	mesh->getBox()->addPoint(width, 0);
+	mesh->getBox()->addPoint(width, height);
+	mesh->getBox()->addPoint(0, height);
 }
 
-CollisionBox Entity::getMesh() {
+CollisionBox* Entity::getMesh() {
 	return mesh;
 }
 
-CollisionBox Entity::getAdjustedMesh() {
-	CollisionBox c = mesh;
-	Line* l = c.getBox();
-	for (int i = 0; i < l->getPointAmount(); i++) {
-		(*l)[i] = mapRelativeToAbsolute((*l)[i]);
+Line Entity::getAdjustedMesh() {
+	CollisionBox* c = mesh;
+	Line l = *(c->getBox());
+	for (int i = 0; i < l.getPointAmount(); i++) {
+		l[i] = mapRelativeToAbsolute(l[i]);
 	}
 
-	return c;
+	return l;
 }

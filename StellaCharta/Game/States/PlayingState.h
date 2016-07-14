@@ -4,6 +4,8 @@
 #include "../PlayerManager.h"
 #include "../Camera.h"
 #include "../World.h"
+#include "../../DebugRenderer.h"
+#include "../Entities/Collisions/Collision.h"
 
 class PlayingState : public GameState {
 public:
@@ -22,6 +24,7 @@ private:
 	sf::RenderTexture* ui;
 	sf::RenderTexture* game;
 
-	std::vector<sf::Vector2f> points;
+	Polygon shape;
+	sf::Uint32 count = 0;
 };
 

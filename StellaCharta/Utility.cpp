@@ -18,7 +18,21 @@ bool utility::liesOnSegment(sf::Vector2f p1, sf::Vector2f s1, sf::Vector2f s2, d
 	return true;
 }
 
-sf::Vector2f utility::nearestPoint(sf::Vector2f p1, sf::Vector2f l1, sf::Vector2f l2) {
+// Now with vectors(TM)!
+sf::Vector2f utility::nearestPoint(sf::Vector2f p, sf::Vector2f a, sf::Vector2f b) {
+	Vector ab = b - a;
+	Vector ap = p - a;
+
+	double distAB = dist(a, b);
+	Vector abs = ab / distAB;
+	Vector aps = ap / distAB;
+
+	double scale = vecDotProduct(abs, aps);
+
+	Vector point = (ab * scale) + a;
+
+	return point;
+	/*
 	double y1 = l1.y;
 	double y2 = l2.y;
 	double x1 = l1.x;
@@ -34,6 +48,7 @@ sf::Vector2f utility::nearestPoint(sf::Vector2f p1, sf::Vector2f l1, sf::Vector2
 	point.y = y3 + k * (x2 - x1);
 
 	return point;
+	*/
 }
 
 double utility::vecCrossProduct(sf::Vector2f v1, sf::Vector2f v2) {
@@ -100,13 +115,13 @@ utility::Orientation utility::getOrientation(sf::Vector2f p1, sf::Vector2f p2, s
 }
 
 //Graham scan to find points
-std::vector<sf::Vector2f> utility::convexHull(std::vector<sf::Vector2f> points) {
+std::vector<Vector> utility::convexHull(std::vector<Vector> points) {
 	int n = points.size();
 
 	if (n < 3)
-		return std::vector<sf::Vector2f>();
+		return std::vector<Vector>();
 
-	std::vector<sf::Vector2f> hull;
+	std::vector<Vector> hull;
 
 	//Find point w/ lowest x and y
 	int lowest = 0;
@@ -145,12 +160,22 @@ std::vector<sf::Vector2f> utility::convexHull(std::vector<sf::Vector2f> points) 
 	}
 
 	hull.push_back(points[0]);
-	hull.push_back(points[1]);
-	hull.push_back(points[2]);
+
+	int s = 2;
+
+	for (int i = 1; i < n; i++) {
+		if (getOrientation(hull[0], points[i], points[i + 1]) == utility::COUNTER_CLOCKWISE) {
+			hull.push_back(points[i]);
+			hull.push_back(points[i+1]);
+			s = i + 2;
+			break;
+		}
+	}
+
 	n = points.size();
 
 	int hi = 2;
-	for (int i = 3; i < n; i++) {
+	for (int i = s; i < n; i++) {
 		sf::Vector2f a = hull[hi - 1];
 		sf::Vector2f b = hull[hi];
 		sf::Vector2f c = points[i];
@@ -168,3 +193,23 @@ std::vector<sf::Vector2f> utility::convexHull(std::vector<sf::Vector2f> points) 
 	return hull;
 }
 
+std::vector<Vector> utility::minkowskiSum(std::vector<Vector> poly1, std::vector<Vector> poly2) {
+	std::vector<Vector> sum;
+
+	for (int a = 0; a < poly1.size(); a++) {
+		for (int b = 0; b < poly2.size(); b++) {
+			sum.push_back(poly1[a] + poly2[b]);
+		}
+	}
+
+	return convexHull(sum);
+	//return sum;
+}
+
+std::vector<Vector> utility::minkowskiDifference(std::vector<Vector> poly1, std::vector<Vector> poly2) {
+	for (int i = 0; i < poly1.size(); i++) {
+		poly1[i] = -poly1[i];
+	}
+
+	return minkowskiSum(poly1, poly2);
+}

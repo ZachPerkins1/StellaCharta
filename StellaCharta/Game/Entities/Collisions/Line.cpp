@@ -10,6 +10,14 @@ std::vector<Segment> Line::getSegments() {
 	return segments;
 }
 
+std::vector<sf::Vector2f> Line::getPoints() {
+	return points;
+}
+
+Line::Line() {
+	points = std::vector<sf::Vector2f>();
+}
+
 void Line::addPoint(sf::Vector2f point) {
 	points.push_back(point);
 }

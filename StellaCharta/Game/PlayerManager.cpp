@@ -9,7 +9,7 @@ PlayerManager::PlayerManager(WorldEntity* ship, Camera* camera): ship(ship), cam
 	}
 
 	if (ship != nullptr) {
-		camera->setTrackingEnabled(false);
+		camera->setTrackingEnabled(true);
 		camera->setTracking(ship);
 	}
 }

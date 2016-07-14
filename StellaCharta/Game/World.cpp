@@ -19,7 +19,11 @@ void World::update(float dt) {
 
 void World::draw(sf::RenderTarget* target) {
 	for (int i = 0; i < worldMap.size(); i++) {
+		//std::vector<sf::Vector2f> v = worldMap[i]->getAdjustedMesh()->getBox().getPoints();
 		worldMap[i]->draw(target);
+		//drender::drawShape(target, worldMap[i]->getAdjustedMesh().getPoints(), sf::Color::Red);
+		//drender::drawShape(target, diff, sf::Color::Blue);
+		//drender::drawPoints(target, std::vector<sf::Vector2f> {p, sf::Vector2f(0, 0) }, sf::Color::Yellow);
 	}
 }
          
@@ -61,6 +65,10 @@ void World::checkCollisions(int index, float dt) {
 
 void World::processCollision(Entity* e1, Entity* e2, float dt) {
 	e1->moveEntity(-dt);
+	e2->moveEntity(-dt);
+	p = e1->mapRelativeToAbsolute(sf::Vector2f(2, 2));
+	sf::Vector2f relDelta((e1->getdx() - e2->getdx()), (e1->getdy() - e2->getdy()));
+	//diff = utility::minkowskiDifference(e1->getAdjustedMesh().getPoints(), e2->getAdjustedMesh().getPoints());
 }
 
 std::vector<sf::Vector2f> World::rayCast(Entity* s, Entity* r) {

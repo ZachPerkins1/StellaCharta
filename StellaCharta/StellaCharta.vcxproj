@@ -19,11 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Entities\Collisions\Collision.cpp" />
+    <ClCompile Include="DebugRenderer.cpp" />
     <ClCompile Include="Game\Tiles\CollisionTile.cpp" />
     <ClCompile Include="Game\Entities\Collisions\CollisionBox.cpp" />
     <ClCompile Include="Game\Entities\Entity.cpp" />
     <ClCompile Include="Game\Entities\Collisions\Line.cpp" />
     <ClCompile Include="Game\Entities\Collisions\Segment.cpp" />
+    <ClCompile Include="Game\Entities\Collisions\Polygon.cpp" />
     <ClCompile Include="TextureRegistry.cpp" />
     <ClCompile Include="Game\Tiles\Floor.cpp" />
     <ClCompile Include="Game\Camera.cpp" />
@@ -37,8 +40,11 @@
     <ClCompile Include="Game\World.cpp" />
     <ClCompile Include="Game\Entities\WorldEntity.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Game\Entities\Collisions\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Entities\Collisions\Collision.h" />
+    <ClInclude Include="DebugRenderer.h" />
     <ClInclude Include="Game\Tiles\CollisionTile.h" />
     <ClInclude Include="Game\Entities\Collisions\CollisionBox.h" />
     <ClInclude Include="Game\Entities\Entity.h" />
@@ -57,8 +63,10 @@
     <ClInclude Include="Game\Entities\WorldEntity.h" />
     <ClInclude Include="Game\Entities\Collisions\Line.h" />
     <ClInclude Include="Game\Entities\Collisions\Segment.h" />
+    <ClInclude Include="Game\Entities\Collisions\Polygon.h" />
     <ClInclude Include="TextureRegistry.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Game\Entities\Collisions\Vector.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F091DA5C-CA06-4D6A-9C49-AD8A042E267F}</ProjectGuid>

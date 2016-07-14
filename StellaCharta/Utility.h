@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Game/Entities/Collisions/Vector.h"
 
 namespace utility {
 	enum Orientation {
@@ -23,7 +24,10 @@ namespace utility {
 	bool segmentIntersects(sf::Vector2f l1, sf::Vector2f l2, sf::Vector2f l3, sf::Vector2f l4, sf::Vector2f* result);
 
 	Orientation getOrientation(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3);
-	std::vector<sf::Vector2f> convexHull(std::vector<sf::Vector2f>);
+	std::vector<Vector> convexHull(std::vector<Vector>);
+
+	std::vector<Vector> minkowskiSum(std::vector<Vector> poly1, std::vector<Vector> poly2);
+	std::vector<Vector> minkowskiDifference(std::vector<Vector> poly1, std::vector<Vector> poly2);
 
 	const double EPSILON = 1e-10;
 };

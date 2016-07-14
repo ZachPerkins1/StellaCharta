@@ -38,8 +38,8 @@ public:
 	virtual sf::Vector2f mapAbsoluteToRelative(sf::Vector2f coords);
 	virtual sf::Vector2f mapRelativeToAbsolute(sf::Vector2f coords);
 
-	CollisionBox getMesh();
-	CollisionBox getAdjustedMesh();
+	CollisionBox* getMesh();
+	Line getAdjustedMesh();
 
 	
 private:
@@ -56,7 +56,7 @@ private:
 	const double DEG_TO_RAD = M_PI / 180;
 	const double RAD_TO_DEG = 180 / M_PI;
 
-	CollisionBox mesh;
+	CollisionBox* mesh;
 
 protected:
 	struct Corners {

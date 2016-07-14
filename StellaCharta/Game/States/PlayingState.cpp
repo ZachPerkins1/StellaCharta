@@ -13,9 +13,9 @@ PlayingState::PlayingState(sf::RenderWindow* window):
 	pManager = new PlayerManager((Ship*)(world->getEntityByIndex(0)), camera);
 	TextureMap t;
 
-	world->getEntityByIndex(0)->rotate(20);
-	world->getEntityByIndex(0)->setdx(5);
-	world->getEntityByIndex(1)->setdx(-5);
+	//world->getEntityByIndex(0)->rotate(20);
+	//world->getEntityByIndex(0)->setdx(5);
+	//world->getEntityByIndex(1)->setdx(-5);
 	//world->getEntityByIndex(1)->setdx(-10);
 }
 
@@ -30,21 +30,27 @@ void PlayingState::draw(sf::RenderTarget* target) {
 
 	camera->setPosition(sf::Vector2f(0, 0));
 
-	for (int i = 0; i < points.size(); i++) {
-		sf::CircleShape c(1);
-		c.setFillColor(sf::Color::Red);
-		c.setPosition(points[i]);
-		game->draw(c);
+	Polygon triangle;
+
+	triangle.addPoint(sf::Vector2f(62, 32));
+	triangle.addPoint(sf::Vector2f(50, 10));
+	triangle.addPoint(sf::Vector2f(21, 14));
+
+	drender::drawShape(game, *(triangle.getPointList()));
+	drender::drawShape(game, *(shape.getPointList()), sf::Color::Blue);
+	drender::drawPoints(game, std::vector<Vector> {Vector(0, 0)}, sf::Color::Yellow);
+
+	//std::vector<sf::Vector2f> hull = utility::convexHull(points);
+
+	//drender::drawShape(game, hull, sf::Color::Green);
+
+	if (shape.getPointList()->size() > 3) {
+		drender::drawShape(game, utility::minkowskiDifference(*(triangle.getPointList()), *(shape.getPointList())));
 	}
 
-	std::vector<sf::Vector2f> hull = utility::convexHull(points);
-	
-	for (int i = 0; i < hull.size(); i++) {
-		sf::CircleShape c(1);
-		c.setFillColor(sf::Color::Green);
-		c.setPosition(hull[i]);
-		game->draw(c);
-	}
+	Collision c;
+	Collision::GJKResult res = c.gjk(shape, triangle);
+	drender::drawShape(game, res.simplex, sf::Color::Red);
 
 	pManager->draw(ui);
 	world->draw(game);
@@ -64,7 +70,7 @@ void PlayingState::draw(sf::RenderTarget* target) {
 
 void PlayingState::onEvent(sf::Event event) {
 	if (event.type == sf::Event::MouseButtonPressed)
-		points.push_back(camera->mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y)));
+		shape.addPoint(camera->mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y)));
 
 
 	pManager->onEvent(event);

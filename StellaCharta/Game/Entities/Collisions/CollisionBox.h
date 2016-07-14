@@ -8,6 +8,7 @@ public:
 	~CollisionBox();
 
 	Line* getBox();
+	CollisionBox& CollisionBox::operator=(const CollisionBox& other);
 
 private:
 	double width;
