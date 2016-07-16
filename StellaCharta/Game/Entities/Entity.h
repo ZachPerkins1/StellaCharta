@@ -26,6 +26,8 @@ public:
 	double getdx();
 	double getdy();
 
+	Vector getVelocity();
+
 	double getdrot();
 
 	double getMass();

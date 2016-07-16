@@ -1,18 +1,20 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Line.h"
+#include "Polygon.h"
 
 class CollisionBox {
 public:
 	CollisionBox();
 	~CollisionBox();
 
-	Line* getBox();
-	CollisionBox& CollisionBox::operator=(const CollisionBox& other);
+	Polygon getConvexHull();
+	Polygon getConvexComponentByID(int id);
 
 private:
 	double width;
 	double height;
 
-	Line* box;
+	std::vector<Polygon> convexComponents;
+
+
 };

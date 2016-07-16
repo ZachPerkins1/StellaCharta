@@ -21,7 +21,27 @@ bool Collision::process() {
 }
 
 bool Collision::detect() {
+	/*
 	hasPoint = false;
+
+	Vector vRel = b->getVelocity() - a->getVelocity();
+	double t = 0;
+	Vector dist = gjkDistance();
+	double distMag = dist.mag();
+
+	while (distMag > 1 && t < 1) {
+		double velocityBound = (vRel*(dist / distMag) + (abs(a->getdrot())*ra) + abs(b->getdrot())*rb));
+		double delta = distMag / velocityBound;
+
+		a->moveEntity(delta);
+		 
+		dist = gjkDistance();
+		distMag = dist.mag();
+		
+	}
+
+	*/
+
 	return false;
 }
 
@@ -83,7 +103,7 @@ bool Collision::containsOrigin(std::vector<Vector>* simplex, Vector * ndir) {
 }
 
 Vector Collision::closestPointToOrigin(Vector a, Vector b) {
-	Vector v = utility::nearestPoint(Vector(0, 0), a, b);
+	Vector v = utility::nearestPointOnSegment(Vector(0, 0), a, b);
 	return v;
 }
 
@@ -121,8 +141,8 @@ bool Collision::gjkIntersection(Polygon p1, Polygon p2) {
 	}
 }
 
-double Collision::gjkDistance(Polygon p1, Polygon p2) {
-	if (p1.vertexCount() > 0 && p2.vertexCount() > 0) {
+Vector Collision::gjkDistance(Polygon p1, Polygon p2) {
+	if (p1.vertexCount() > 2 && p2.vertexCount() > 2) {
 		Vector a;
 		Vector b;
 		Vector c;
@@ -136,15 +156,18 @@ double Collision::gjkDistance(Polygon p1, Polygon p2) {
 		sd = closestPointToOrigin(a, b);
 
 		while (true) {
-
 			sd = -sd;
 			if (sd.isZero())
-				return -1;
+				return sf::Vector2f(0, 0);
 
 			c = support(p1, p2, sd);
 
 			//Our last try
+			//double aMag = a.mag();
+			//Vector sdScaled = sd / aMag;
+
 			double da = a * sd;
+
 
 			// Our current try
 			double dc = c * sd;
@@ -153,7 +176,7 @@ double Collision::gjkDistance(Polygon p1, Polygon p2) {
 			double diff = dc - da;
 
 			if (diff < TOLERANCE) {
-				return sd.mag();
+				return sd;
 			}
 
 			Vector p1 = closestPointToOrigin(a, c);
@@ -168,6 +191,5 @@ double Collision::gjkDistance(Polygon p1, Polygon p2) {
 				sd = p2;
 			}
 		}
-
 	}
 }

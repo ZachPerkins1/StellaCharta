@@ -15,8 +15,9 @@ namespace utility {
 	double distSq(sf::Vector2f p1, sf::Vector2f p2);
 
 	bool liesOnSegment(sf::Vector2f p1, sf::Vector2f s1, sf::Vector2f s2, double tolerance);
-	sf::Vector2f nearestPoint(sf::Vector2f p1, sf::Vector2f l1, sf::Vector2f l2);
 
+	sf::Vector2f nearestPointOnLine(sf::Vector2f p1, sf::Vector2f l1, sf::Vector2f l2);
+	sf::Vector2f nearestPointOnSegment(sf::Vector2f p1, sf::Vector2f l1, sf::Vector2f l2);
 
 	double vecCrossProduct(sf::Vector2f v1, sf::Vector2f v2);
 	double vecDotProduct(sf::Vector2f v1, sf::Vector2f v2);
@@ -24,10 +25,6 @@ namespace utility {
 	bool segmentIntersects(sf::Vector2f l1, sf::Vector2f l2, sf::Vector2f l3, sf::Vector2f l4, sf::Vector2f* result);
 
 	Orientation getOrientation(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3);
-	std::vector<Vector> convexHull(std::vector<Vector>);
-
-	std::vector<Vector> minkowskiSum(std::vector<Vector> poly1, std::vector<Vector> poly2);
-	std::vector<Vector> minkowskiDifference(std::vector<Vector> poly1, std::vector<Vector> poly2);
 
 	const double EPSILON = 1e-10;
 };

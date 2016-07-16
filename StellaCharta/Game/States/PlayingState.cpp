@@ -45,11 +45,11 @@ void PlayingState::draw(sf::RenderTarget* target) {
 	//drender::drawShape(game, hull, sf::Color::Green);
 
 	if (shape.getPointList()->size() > 3) {
-		drender::drawShape(game, utility::minkowskiDifference(*(triangle.getPointList()), *(shape.getPointList())));
+		//drender::drawShape(game, utility::minkowskiDifference(*(triangle.getPointList()), *(shape.getPointList())));
 	}
 
 	Collision c;
-	double res = c.gjkDistance(triangle, shape);
+	Vector res = c.gjkDistance(triangle, shape);
 	//drender::drawShape(game, res.simplex, sf::Color::Red);
 
 	pManager->draw(ui);

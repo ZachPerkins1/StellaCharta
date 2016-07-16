@@ -10,14 +10,16 @@ CollisionBox::CollisionBox() {
 CollisionBox::~CollisionBox() {
 }
 
-Line* CollisionBox::getBox() {
-	return box;
-}
+Polygon CollisionBox::getConvexHull() {
+	Polygon result;
 
-CollisionBox& CollisionBox::operator=(const CollisionBox& other) {
-	if (this != &other) {
-			*box = *other.box;
+	for (int i = 0; i < convexComponents.size(); i++) {
+		result = result.combine(convexComponents[i]);
 	}
 
-	return *this;
+	return result.convexHull();
+}
+
+Polygon CollisionBox::getConvexComponentByID(int id) {
+	return convexComponents[id];
 }

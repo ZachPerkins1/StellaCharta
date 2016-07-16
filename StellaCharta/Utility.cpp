@@ -18,8 +18,7 @@ bool utility::liesOnSegment(sf::Vector2f p1, sf::Vector2f s1, sf::Vector2f s2, d
 	return true;
 }
 
-// Now with vectors(TM)!
-sf::Vector2f utility::nearestPoint(sf::Vector2f p, sf::Vector2f a, sf::Vector2f b) {
+sf::Vector2f utility::nearestPointOnLine(sf::Vector2f p, sf::Vector2f a, sf::Vector2f b) {
 	Vector ab = b - a;
 	Vector ap = p - a;
 
@@ -32,23 +31,29 @@ sf::Vector2f utility::nearestPoint(sf::Vector2f p, sf::Vector2f a, sf::Vector2f 
 	Vector point = (ab * scale) + a;
 
 	return point;
-	/*
-	double y1 = l1.y;
-	double y2 = l2.y;
-	double x1 = l1.x;
-	double x2 = l2.x;
+}
 
-	double x3 = p1.x;
-	double y3 = p1.y;
+sf::Vector2f utility::nearestPointOnSegment(sf::Vector2f p, sf::Vector2f a, sf::Vector2f b) {
+	Vector ab = b - a;
+	Vector ap = p - a;
 
-	sf::Vector2f point;
+	double distAB = dist(a, b);
+	Vector abs = ab / distAB;
+	Vector aps = ap / distAB;
 
-	double k = ((y2 - y1) * (x3 - x1) - (x2 - x1) * (y3 - y1)) / (pow(y2 - y1, 2) + pow(x2 - x1, 2));
-	point.x = x3 - k * (y2 - y1);
-	point.y = y3 + k * (x2 - x1);
+	double scale = vecDotProduct(abs, aps);
+
+	if (scale > 1) {
+		scale = 1;
+	}
+
+	if (scale < 0) {
+		scale = 0;
+	}
+
+	Vector point = (ab * scale) + a;
 
 	return point;
-	*/
 }
 
 double utility::vecCrossProduct(sf::Vector2f v1, sf::Vector2f v2) {
@@ -112,104 +117,4 @@ utility::Orientation utility::getOrientation(sf::Vector2f p1, sf::Vector2f p2, s
 	if (k == 0) return utility::COLLINEAR;
 	else if (k < 0) return utility::CLOCKWISE;
 	else return utility::COUNTER_CLOCKWISE;
-}
-
-//Graham scan to find points
-std::vector<Vector> utility::convexHull(std::vector<Vector> points) {
-	int n = points.size();
-
-	if (n < 3)
-		return std::vector<Vector>();
-
-	std::vector<Vector> hull;
-
-	//Find point w/ lowest x and y
-	int lowest = 0;
-	for (int i = 1; i < n; i++) {
-		sf::Vector2f l = points[lowest];
-		sf::Vector2f p = points[i];
-
-		if (p.y > l.y) {
-			lowest = i;
-		}
-		else if (p.y == l.y) {
-			if (p.x < l.x) {
-				lowest = i;
-			}
-		}
-	}
-
-	sf::Vector2f tmp = points[0];
-	points[0] = points[lowest];
-	points[lowest] = tmp;
-
-	//Sort points based on polar angle from point 0
-	for (int i = 1; i < n; i++) {
-		for (int q = 1; q < n; q++) {
-			sf::Vector2f a = points[i];
-			sf::Vector2f b = points[q];
-
-			float islopea = (a.x - points[0].x) / (a.y - points[0].y);
-			float islopeb = (b.x - points[0].x) / (b.y - points[0].y);
-
-			if (islopea > islopeb) {
-				points[q] = a;
-				points[i] = b;
-			}
-		}
-	}
-
-	hull.push_back(points[0]);
-
-	int s = 2;
-
-	for (int i = 1; i < n; i++) {
-		if (getOrientation(hull[0], points[i], points[i + 1]) == utility::COUNTER_CLOCKWISE) {
-			hull.push_back(points[i]);
-			hull.push_back(points[i+1]);
-			s = i + 2;
-			break;
-		}
-	}
-
-	n = points.size();
-
-	int hi = 2;
-	for (int i = s; i < n; i++) {
-		sf::Vector2f a = hull[hi - 1];
-		sf::Vector2f b = hull[hi];
-		sf::Vector2f c = points[i];
-
-		while (getOrientation(hull[hi - 1], hull[hi], points[i]) != utility::COUNTER_CLOCKWISE) {
-			hull.pop_back();
-			hi--;
-		}
-
-		hull.push_back(points[i]);
-		hi++;
-	}
-
-	
-	return hull;
-}
-
-std::vector<Vector> utility::minkowskiSum(std::vector<Vector> poly1, std::vector<Vector> poly2) {
-	std::vector<Vector> sum;
-
-	for (int a = 0; a < poly1.size(); a++) {
-		for (int b = 0; b < poly2.size(); b++) {
-			sum.push_back(poly1[a] + poly2[b]);
-		}
-	}
-
-	return convexHull(sum);
-	//return sum;
-}
-
-std::vector<Vector> utility::minkowskiDifference(std::vector<Vector> poly1, std::vector<Vector> poly2) {
-	for (int i = 0; i < poly1.size(); i++) {
-		poly1[i] = -poly1[i];
-	}
-
-	return minkowskiSum(poly1, poly2);
 }

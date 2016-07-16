@@ -18,7 +18,7 @@ public:
 	Vector closestPointToOrigin(Vector a, Vector b);
 
 	bool gjkIntersection(Polygon p1, Polygon p2);
-	double gjkDistance(Polygon p1, Polygon p2);
+	Vector gjkDistance(Polygon p1, Polygon p2);
 
 private:
 
@@ -28,7 +28,7 @@ private:
 	sf::Vector2f collisionPoint;
 	bool hasPoint = false;
 
-	const double TOLERANCE = 200;
+	const double TOLERANCE = 10;
 
 };
 

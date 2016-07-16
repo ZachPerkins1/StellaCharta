@@ -24,7 +24,6 @@
     <ClCompile Include="Game\Tiles\CollisionTile.cpp" />
     <ClCompile Include="Game\Entities\Collisions\CollisionBox.cpp" />
     <ClCompile Include="Game\Entities\Entity.cpp" />
-    <ClCompile Include="Game\Entities\Collisions\Line.cpp" />
     <ClCompile Include="Game\Entities\Collisions\Segment.cpp" />
     <ClCompile Include="Game\Entities\Collisions\Polygon.cpp" />
     <ClCompile Include="TextureRegistry.cpp" />
@@ -61,7 +60,6 @@
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Game\IWorld.h" />
     <ClInclude Include="Game\Entities\WorldEntity.h" />
-    <ClInclude Include="Game\Entities\Collisions\Line.h" />
     <ClInclude Include="Game\Entities\Collisions\Segment.h" />
     <ClInclude Include="Game\Entities\Collisions\Polygon.h" />
     <ClInclude Include="TextureRegistry.h" />

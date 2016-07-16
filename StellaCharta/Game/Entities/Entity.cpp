@@ -39,6 +39,10 @@ double Entity::getdy() {
 	return dy;
 }
 
+Vector Entity::getVelocity() {
+	return Vector(dx, dy);
+}
+
 double Entity::getdrot() {
 	return drot;
 }
@@ -59,8 +63,8 @@ sf::Vector2f Entity::mapAbsoluteToRelative(sf::Vector2f coords) {
 	if (dist <= lenDiag) {
 		Corners c = getCorners();
 
-		sf::Vector2f topPoint = utility::nearestPoint(coords, c.ul, c.ur);
-		sf::Vector2f leftPoint = utility::nearestPoint(coords, c.ul, c.ll);
+		sf::Vector2f topPoint = utility::nearestPointOnLine(coords, c.ul, c.ur);
+		sf::Vector2f leftPoint = utility::nearestPointOnLine(coords, c.ul, c.ll);
 
 		if (utility::liesOnSegment(topPoint, c.ul, c.ur, 0.1) && utility::liesOnSegment(leftPoint, c.ul, c.ll, 0.1)) {
 			return sf::Vector2f(utility::dist(leftPoint, coords), utility::dist(topPoint, coords));
